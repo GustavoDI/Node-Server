@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node app"
-    
   },
   "keywords": [],
   "author": "",
@@ -13,6 +12,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "mongoose": "^6.2.7"
   }
 }

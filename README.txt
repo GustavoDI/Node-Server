@@ -51,8 +51,34 @@ Parametros del segmento y la query.
 	para agrega paramentros al segmento en un PUT y en  DELETE debemos agregar un dato que tiene la cadena
 	necesaria para los datos.
 	en este caso express ya tiene una forma para obtener el id y es atraves de params.id
+
+	para el caso de querer obtener con GET y dentro de la solicitud contenga una query con datos como:
+	(api/usuarios?q=hola&nombre=gustavo&apikey=123456).
+	para obtener solo lo que se necesita podriamos destructurar la información desde la query que llega
+	desde la solicitud.
+	si por alguna razón la query viene sin datos necesarios podemos indicar que contenga un valor por 
+	defecto.
+	Ejemplo:
+	(const {q, nombre = 'No name', apikey, page = 1} = req.query;)
+
+Creación BD en Mongo y Conexion a BD
+	la BD a utilizar es mongoDB  con mongo atlas y mongo compas. Crear un cluster un administrador 
+	luego crear la conexión a mongo compas.
+
+	Conexión desde el modelo para esto debemos utilizaremos mongoose ODM 
+	instalar mongoose (revisar documentación ).
+	crear una carpeta llamada database que se encargara de nuestra configuración de la BD 
+	crear un archivo con nombre representativo y requerir mongoose
+	const mongoose = require ('mongoose');
+
+	luego debemos crear nuestra conección y esta debe ser async y ademas debe llevar un 
+	try y catch esto se debe no por nuestra parte es compleicado por agarrar el error en la BD
+	en el catch debemos agregar el throw  new Error('')
+
+
 	
-	
+
+
   
 	
 
