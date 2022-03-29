@@ -22,7 +22,7 @@ const UserSchema = Schema({
     rol:{
         type: String,
         required: true,
-        enum: ['ADMIN_ROL', 'USER_ROL']
+        // enum: ['ADMIN_ROL', 'USER_ROL']
     },
     estado:{
         type: Boolean,
@@ -32,6 +32,11 @@ const UserSchema = Schema({
         type: Boolean,
         default: false
     },
-})
+});
+
+UserSchema.methods.toJSON = function () {
+    const {password, ...user} = this.toObject();
+    return user;
+}
 
 module.exports = model('Usuario', UserSchema);
