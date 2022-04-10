@@ -3,22 +3,37 @@ const Usuario = require('../models/usuario.model');
 const bcryptjs = require('bcryptjs');
 
 
-const usuariosGet = (req =  request, res = response) => {
+const usuariosGet = async(req =  request, res = response) => {
 
     // const query = req.query;
-    const {q, nombre = 'No name', apikey, page = 1} = req.query;
+    // const {q, nombre = 'No name', apikey, page = 1} = req.query;
+    const {limite = 5, desde= 0} = req.query;
+    const  usuarios =  await Usuario.find()
+        .skip(desde)
+        .limit(Number(limite));
     res.json({
-        q, nombre, apikey, page
+        usuarios
         
     });
 }
 
-const usuariosPut = (req, res = response) => {
-    const id = req.params.id 
+const usuariosPut = async(req, res = response) => {
+    const id = req.params.id;
+    const {_id, password, google, correo, ...resto} = req.body;
+
+    //validar contra bd
+    if (password) {
+        //encriptar contraseña
+        const salt = bcryptjs.genSaltSync();
+        resto.password = bcryptjs.hashSync(password, salt);
+    }
+    const usuario = await Usuario.findByIdAndUpdate( id, resto);
+
 
     res.json({
+        msg: "put api",
         id ,
-        msg: "put api"
+        usuario
     })
 }
 
@@ -29,12 +44,12 @@ const usuariosPost = async(req, res =  response) => {
     const usuario =  new Usuario({nombre, correo, password, rol});
 
     // verificar si el correo existe
-    const existeEmail = await Usuario.findOne({correo});
-    if (existeEmail) {
-        return res.status(400).json({
-            msg: 'mail no corresponde'
-        });
-    }
+    // const existeEmail = await Usuario.findOne({correo});
+    // if (existeEmail) {
+    //     return res.status(400).json({
+    //         msg: 'mail no corresponde'
+    //     });
+    // }
     // encriptar contraseña
     const salt  = bcryptjs.genSaltSync();
     usuario.password = bcryptjs.hashSync(password, salt);
