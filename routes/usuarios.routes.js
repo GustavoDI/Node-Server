@@ -27,7 +27,7 @@ router.post('/',[
     validarCampos
 ] ,usuariosPost);
 
-router.delete('/', usuariosDelete);
+router.delete('/:id', usuariosDelete);
 
 router.patch('/', usuariosPatch);
 
