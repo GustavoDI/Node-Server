@@ -75,10 +75,21 @@ const usuariosPost = async(req, res =  response) => {
         
     })
 }
-const usuariosDelete = (req, res) => {
+const usuariosDelete = async (req, res) => {
+
+    const {id} = req.params;
+    // Borrar fisicamente desde la base de de datos (esto no se hace)
+    // const usuario =await Usuario.findByIdAndDelete(id)
+
+    //  lo que se debe hacer 
+    const usuario = await Usuario.findByIdAndUpdate(id, {estado:false})
+
+
     res.json({
-        ok:true,
-        msg:"delete api"
+        // ok:true,
+        // id,
+        // msg:"delete api"
+        usuario
     })
 }
 
