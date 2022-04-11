@@ -75,9 +75,41 @@ Creación BD en Mongo y Conexion a BD
 	try y catch esto se debe no por nuestra parte es compleicado por agarrar el error en la BD
 	en el catch debemos agregar el throw  new Error('')
 
+Creación del modelo de usuario
+	en el models crear archivo. En el archivo requerir de mongoose el model y schema.
+	(https://mongoosejs.com/docs/guide.html).
+	para crear el modelo debemos utilizar el schema y asignar un nombre (colección), el 
+	cual sera = al schema () dentro del debe ir un objeto que puede ser nombre este sera un objeto.
+	para más leer documentación.
+	const UserSchema = Schema({
+		nombre :{
+			type: String,
+			required: true
+		}
+	});
 
-	
+Realizar un POST en la colección.
+	en este paso necesitamos insertar en la BD
+	** Usuario con al u mayuscula es un estandar y nos permite crear una instancia.
+	Todo lo que provenga desde la req es lo que se almacenara en una constante 
+	al saber que informacion viene desde la request podemos crear una instancia de 
+	nuestro modelo de Usuario entregando como argumento la constante que fue creada
+	en la req  y esta sea asignada a una const
+	y posteriormente guaradar en la base de datos con el usuario.save();
 
+Encriptar la constraseña
+	para encriptar la contraseña se utiliza un paquete de node llamado bcryptjs 
+	(https://www.npmjs.com/package/bcryptjs).
+	bcryptjs lo utilizaremos con el post y el PUT, en el POST del controller.
+	debemos requerir el const bcrypt = require('bcryptjs'); y para utilizar
+	y hacer un hash de una via generaremos una encriptacion de 10 vueltas 
+	la que es por defecto lo que realiza el hash 
+	(const salt  = bcryptjs.genSaltSync();) paso siguiente debemos  encriptar
+	para este codigo el cual tiene destructurado el password  llamarem de nuestra
+	instancia  que tiene un objeto literal  y extraemos el password para asignar 
+	el hash. 
+	Al hash le debmos proporcionar la constraseña y el salt.
+	(usuario.password = bcryptjs.hashSync(password, salt);)
 
   
 	
