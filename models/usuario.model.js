@@ -35,7 +35,9 @@ const UserSchema = Schema({
 });
 
 UserSchema.methods.toJSON = function () {
-    const {password, ...user} = this.toObject();
+    const {__v, password, _id, ...user} = this.toObject();
+    // si quiero cambiar el nombre del _id 
+    user.uid = _id;
     return user;
 }
 

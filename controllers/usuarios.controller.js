@@ -3,6 +3,7 @@ const Usuario = require('../models/usuario.model');
 const bcryptjs = require('bcryptjs');
 
 
+
 const usuariosGet = async(req =  request, res = response) => {
 
     // const query = req.query;
@@ -75,22 +76,18 @@ const usuariosPost = async(req, res =  response) => {
         
     })
 }
-const usuariosDelete = async (req, res) => {
-
+const usuariosDelete = async (req, res = response) => {
     const {id} = req.params;
     // Borrar fisicamente desde la base de de datos (esto no se hace)
     // const usuario =await Usuario.findByIdAndDelete(id)
-
+    // const uid = req.uid
     //  lo que se debe hacer 
-    const usuario = await Usuario.findByIdAndUpdate(id, {estado:false})
-
-
+    const usuario = await Usuario.findByIdAndUpdate(id, {estado:false});
+    // const usuarioAutenticado =  usuario;
     res.json({
-        // ok:true,
-        // id,
-        // msg:"delete api"
-        usuario
-    })
+        usuario, 
+        // usuarioAutenticado
+    });
 }
 
 const usuariosPatch = (req, res) => {
