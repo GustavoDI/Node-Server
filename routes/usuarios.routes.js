@@ -3,9 +3,6 @@ const {Router} = require('express') ;
 const { check } = require('express-validator');
 const router = Router();
 
-// const {validarCampos} = require('../middlewares/validar-campos');
-// const { validarJWT } = require('../middlewares/validar-jwt');
-// const { adminRole, tieneRol } = require('../middlewares/validar-roles');
 const {validarCampos, validarJWT, adminRole, tieneRol }= require('../middlewares/index')
 
 const {esRolValido, emailExiste, existeUsuarioPorID}= require('../helpers/db-validator');
