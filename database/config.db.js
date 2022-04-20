@@ -10,10 +10,11 @@ const dbCnn = async ()=>{
             // useFindAndModify: false
         });
         console.log('Base datos en linea');
+        console.log(process.env.MONGODB_ATLAS);
 
     } catch (error) {
         console.log(error);
-        throw new Error('Error al iniciar de la base datos')
+        throw new Error('Error al iniciar de la base datos');
     }
 
 
